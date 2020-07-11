@@ -20,6 +20,7 @@
 ## Comandos
 
 ### Images 
+- `docker images ls`
 - `docker images -a`
 Listar imágenes
 
@@ -52,7 +53,10 @@ Elimina todos los contenedores
 
 
 ### Contenedores 
-
+- `docker ps`
+- `docker ps -a`
+Listar todos los contenedores 
+ß
 - `docker rmi $(docker images -a -q)`
 Elimina todos las imágenes 
 

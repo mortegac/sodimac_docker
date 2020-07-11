@@ -1,0 +1,47 @@
+version: '2.3'
+
+services:
+    mysql:
+        image: mariadb:10.3
+        container_name: mariadb
+        ports:
+            - "3307:3306"
+        volumes:
+            - ./store/:/var/lib/mysql
+        networks:
+            - mysqlnetworks
+        environment: 
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=local
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=root
+            - PMA_ARBITRARY=1
+            - PMA_HOST=mysql
+            - PMA_PORT=3306
+            - PMA_USER=root
+            - PMA_PASSWORD=root
+
+    mysql-admin:
+        image: phpmyadmin/phpmyadmin
+        ports: 
+            - "8001:80"
+        networks:
+            - mysqlnetworks
+        depends_on:
+            - mysql
+        environment:  
+            - PMA_HOST=mysql
+            - PMA_PORT=3306
+            - PMA_USER=root
+            - PMA_PASSWORD=root
+
+volumes: 
+    mysql:
+        driver: local
+
+networks: 
+    mysqlnetworks:
+        driver: bridge
+    
+
+    
